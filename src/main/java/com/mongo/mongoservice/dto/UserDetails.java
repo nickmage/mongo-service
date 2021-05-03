@@ -1,4 +1,6 @@
-package com.mongo.mongoservice.dao;
+package com.mongo.mongoservice.dto;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDate;
 import java.util.Set;
@@ -9,6 +11,7 @@ public class UserDetails {
     private String firstName;
     private String lastName;
     private String city;
+    @JsonFormat(pattern = "dd.MM.yyyy")
     private LocalDate dateOfBirth;
     private boolean enabled;
     private Set<String> followings;
@@ -85,6 +88,42 @@ public class UserDetails {
         public UserDetails build() {
             return new UserDetails(id, username, firstName, lastName, city, dateOfBirth, enabled, followers, followings);
         }
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public Set<String> getFollowings() {
+        return followings;
+    }
+
+    public Set<String> getFollowers() {
+        return followers;
     }
 
 }

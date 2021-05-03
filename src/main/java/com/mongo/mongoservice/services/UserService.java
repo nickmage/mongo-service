@@ -1,6 +1,6 @@
 package com.mongo.mongoservice.services;
 
-import com.mongo.mongoservice.dao.UserDetails;
+import com.mongo.mongoservice.dto.UserDetails;
 import com.mongo.mongoservice.models.User;
 import com.mongo.mongoservice.repositories.UserRepository;
 import org.springframework.data.domain.PageRequest;
@@ -25,7 +25,7 @@ public class UserService {
         return userRepository.findById(id).map(this::toUserDetails).orElseThrow(() -> new RuntimeException("User not found"));
     }
 
-    public List<UserDetails> getAllUsers(Integer page, Integer pageLength) {
+    public List<UserDetails> getPageableUsers(Integer page, Integer pageLength) {
         Pageable pageable = PageRequest.of(page, pageLength);
         return userRepository.findAll(pageable).getContent().stream()
                 .map(this::toUserDetails)

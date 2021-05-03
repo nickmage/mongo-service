@@ -1,6 +1,6 @@
 package com.mongo.mongoservice.controllers;
 
-import com.mongo.mongoservice.dao.UserDetails;
+import com.mongo.mongoservice.dto.UserDetails;
 import com.mongo.mongoservice.models.User;
 import com.mongo.mongoservice.services.UserService;
 import org.springframework.http.ResponseEntity;
@@ -32,9 +32,9 @@ public class MongoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<UserDetails>> getAllUsers(@RequestParam(value = "page", defaultValue = "1") Integer page,
+    public ResponseEntity<List<UserDetails>> getPageableUsers(@RequestParam(value = "page", defaultValue = "1") Integer page,
                                                          @RequestParam(value = "pageLength", defaultValue = "10") Integer pageLength) {
-        return ResponseEntity.ok(userService.getAllUsers(page, pageLength));
+        return ResponseEntity.ok(userService.getPageableUsers(page, pageLength));
     }
 
     @PostMapping
@@ -42,7 +42,7 @@ public class MongoController {
         return ResponseEntity.ok(userService.createUser(user));
     }
 
-    @PostMapping
+    @PostMapping("/all")
     public void createAllUsers(@RequestBody List<User> users) {
         userService.createAllUsers(users);
     }
