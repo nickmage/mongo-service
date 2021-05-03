@@ -60,12 +60,12 @@ public class UserService {
                 .withCity(user.getCity())
                 .withDateOfBirth(user.getDateOfBirth())
                 .withEnabledFlag(user.isEnabled())
-                .withFollowers(user.getFollowers())
-                .withFollowings(calculateFollowings(user.getId()))
+                .withFollowings(user.getFollowings())
+                .withFollowers(calculateFollowers(user.getId()))
                 .build();
     }
 
-    private Set<String> calculateFollowings(String userId) {
+    private Set<String> calculateFollowers(String userId) {
         return new HashSet<>();
     }
 

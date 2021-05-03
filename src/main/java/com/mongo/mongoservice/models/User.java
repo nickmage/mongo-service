@@ -21,12 +21,12 @@ public class User {
     @JsonFormat(pattern = "dd.MM.yyyy")
     private LocalDate dateOfBirth;
     private boolean enabled;
-    private Set<String> followers;
+    private Set<String> followings;
 
     public User() {
     }
 
-    public User(String id, String username, String firstName, String lastName, String city, LocalDate dateOfBirth, boolean enabled, Set<String> followers) {
+    public User(String id, String username, String firstName, String lastName, String city, LocalDate dateOfBirth, boolean enabled, Set<String> followings) {
         this.id = id;
         this.username = username;
         this.firstName = firstName;
@@ -34,7 +34,7 @@ public class User {
         this.city = city;
         this.dateOfBirth = dateOfBirth;
         this.enabled = enabled;
-        this.followers = followers;
+        this.followings = followings;
     }
 
     public String getId() {
@@ -93,20 +93,12 @@ public class User {
         this.enabled = enabled;
     }
 
-    public Set<String> getFollowers() {
-        return followers;
+    public Set<String> getFollowings() {
+        return followings;
     }
 
-    public void setFollowers(Set<String> followers) {
-        this.followers = followers;
-    }
-
-    public void addFollower(String follower) {
-        followers.add(follower);
-    }
-
-    public void removeFollower(Long follower) {
-        followers.remove(follower);
+    public void setFollowings(Set<String> followings) {
+        this.followings = followings;
     }
 
     @Override

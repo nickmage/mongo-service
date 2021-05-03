@@ -11,10 +11,10 @@ public class UserDetails {
     private String city;
     private LocalDate dateOfBirth;
     private boolean enabled;
-    private Set<String> followers;
     private Set<String> followings;
+    private Set<String> followers;
 
-    private UserDetails(String id, String username, String firstName, String lastName, String city, LocalDate dateOfBirth, boolean enabled, Set<String> followers, Set<String> followings) {
+    private UserDetails(String id, String username, String firstName, String lastName, String city, LocalDate dateOfBirth, boolean enabled, Set<String> followings, Set<String> followers) {
         this.id = id;
         this.username = username;
         this.firstName = firstName;
@@ -22,8 +22,8 @@ public class UserDetails {
         this.city = city;
         this.dateOfBirth = dateOfBirth;
         this.enabled = enabled;
-        this.followers = followers;
         this.followings = followings;
+        this.followers = followers;
     }
 
     public static class Builder {
@@ -78,7 +78,7 @@ public class UserDetails {
         }
 
         public Builder withFollowings(Set<String> followings) {
-            this.followings = followers;
+            this.followings = followings;
             return this;
         }
 
