@@ -6,27 +6,27 @@ import java.time.LocalDate;
 import java.util.Set;
 
 public class UserDetails {
-    private String id;
-    private String username;
-    private String firstName;
-    private String lastName;
-    private String city;
+    private final String id;
+    private final String username;
+    private final String firstName;
+    private final String lastName;
+    private final String city;
     @JsonFormat(pattern = "dd.MM.yyyy")
-    private LocalDate dateOfBirth;
-    private boolean enabled;
-    private Set<String> followings;
-    private Set<String> followers;
+    private final LocalDate dateOfBirth;
+    private final boolean enabled;
+    private final Set<String> followings;
+    private final Set<String> followers;
 
-    private UserDetails(String id, String username, String firstName, String lastName, String city, LocalDate dateOfBirth, boolean enabled, Set<String> followings, Set<String> followers) {
-        this.id = id;
-        this.username = username;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.city = city;
-        this.dateOfBirth = dateOfBirth;
-        this.enabled = enabled;
-        this.followings = followings;
-        this.followers = followers;
+    private UserDetails(Builder builder) {
+        this.id = builder.id;
+        this.username = builder.username;
+        this.firstName = builder.firstName;
+        this.lastName = builder.lastName;
+        this.city = builder.city;
+        this.dateOfBirth = builder.dateOfBirth;
+        this.enabled = builder.enabled;
+        this.followings = builder.followings;
+        this.followers = builder.followers;
     }
 
     public static class Builder {
@@ -37,8 +37,8 @@ public class UserDetails {
         private String city;
         private LocalDate dateOfBirth;
         private boolean enabled;
-        private Set<String> followers;
         private Set<String> followings;
+        private Set<String> followers;
 
         public Builder withId(String id) {
             this.id = id;
@@ -86,7 +86,7 @@ public class UserDetails {
         }
 
         public UserDetails build() {
-            return new UserDetails(id, username, firstName, lastName, city, dateOfBirth, enabled, followers, followings);
+            return new UserDetails(this);
         }
     }
 
