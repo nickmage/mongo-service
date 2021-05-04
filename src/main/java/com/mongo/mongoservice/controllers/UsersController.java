@@ -18,11 +18,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/users")
-public class MongoController {
+public class UsersController {
 
     private final UserService userService;
 
-    public MongoController(UserService userService) {
+    public UsersController(UserService userService) {
         this.userService = userService;
     }
 
@@ -43,7 +43,7 @@ public class MongoController {
     }
 
     @PostMapping("/all")
-    public void createAllUsers(@RequestBody List<User> users) {
+    public void bulkCreateUsers(@RequestBody List<User> users) {
         userService.createAllUsers(users);
     }
 

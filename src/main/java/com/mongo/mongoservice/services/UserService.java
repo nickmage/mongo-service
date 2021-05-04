@@ -22,7 +22,7 @@ public class UserService {
     }
 
     public UserDetails getUser(String id) {
-        return userRepository.findById(id).map(this::toUserDetails).orElseThrow(() -> new RuntimeException("User not found"));
+        return toUserDetails(getByUserId(id));
     }
 
     public List<UserDetails> getPageableUsers(Integer page, Integer pageLength) {
@@ -33,21 +33,37 @@ public class UserService {
     }
 
     public User createUser(User user) {
+        user.setFollowings(new HashSet<>());
         userRepository.save(user);
         return user;
     }
 
     public void createAllUsers(List<User> users) {
+        users.forEach(user -> user.setFollowings(new HashSet<>()));
         userRepository.saveAll(users);
     }
 
-    public User updateUser(String id, User user) {
+    public User updateUser(String id, User updatedUser) {
+        //todo: refactor this
+        User currentUser = getByUserId(id);
+        currentUser.setUsername(updatedUser.getUsername());
+        currentUser.setFirstName(updatedUser.getFirstName());
+        currentUser.setLastName(updatedUser.getLastName());
+        currentUser.setCity(updatedUser.getCity());
+        currentUser.setDateOfBirth(updatedUser.getDateOfBirth());
+        currentUser.setEnabled(updatedUser.isEnabled());
+        userRepository.save(currentUser);
         return null;
     }
 
     public User deleteUser(String id) {
         userRepository.deleteById(id);
         return null;
+    }
+
+    public User getByUserId(String id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
     }
 
     private UserDetails toUserDetails(User user) {
