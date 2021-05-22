@@ -81,7 +81,9 @@ public class UserService {
     }
 
     private Set<String> calculateFollowers(String userId) {
-        return new HashSet<>();
+        return userRepository.getFollowersById(userId).stream()
+                .map(User::getId)
+                .collect(Collectors.toSet());
     }
 
 }
