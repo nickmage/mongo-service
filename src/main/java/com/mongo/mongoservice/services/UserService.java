@@ -85,17 +85,3 @@ public class UserService {
     }
 
 }
-/*
-Kubernetes	- know core concepts
-        - kubectl main commands (how to check pod status, logs, restart pod, etc)
-        - использование kubectl при необходимости при работе в проекте
-
-        - Create simple Restful service integrated with MongoDB & deployed locally in k8s
-
-
-        MongoDB	Know :
-        - how to perform CRUD operations
-        - What index is, their types, usages etc.
-        - Purpose of aggregations, stages
-        - Query optimization
-*/
