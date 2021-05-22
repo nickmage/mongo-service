@@ -70,7 +70,13 @@ Find documents by followings[2]:
 > db.collectionName.find({"followings.2": "6090241bc6e6d715c9c7032d"}) 
 
 Find count of followers by user id:
-> db.collectionName.find({"followings": "6090241bc6e6d715c9c70380"}).count() 
+> db.collectionName.count({"followings": "6090241bc6e6d715c9c70380"})
+
+Find unique values by field:
+> db.collectionName.distinct("dateOfBirth")
+
+Find amount of unique values by field:
+> db.collectionName.distinct("dateOfBirth").length
 
 Find documents that contain an array field with at least one element that matches all the specified query criteria:
 > db.collectionName.find({"followings": {"$elemMatch": {"$eq": "6090241bc6e6d715c9c7037f"}}})
@@ -166,5 +172,3 @@ Bulk write:
 "update": {"$set": {"city": "Testburg"}}
 }}
 ])
-
-> db.collectionName.find({}, {"followings": 0}).sort({"followings": -1})
