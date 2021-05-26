@@ -12,7 +12,7 @@ Delete collection from a database:
 
 ****CRUD operations****
 
-**Create operations**
+***Create operations***
 
 Create a document:
 > db.collectionName.insertOne({
@@ -47,7 +47,7 @@ Find documents with a limit of 5:
 > db.collectionName.find().limit(5)
 
 
-*Filters:*
+**Filters:**
 Find documents by username:
 > db.collectionName.find({"username": "TestUser"})
 
@@ -172,3 +172,22 @@ Bulk write:
 "update": {"$set": {"city": "Testburg"}}
 }}
 ])
+
+
+****Indexes****
+
+***Types***
+
+1. Single Field (may contain single field with dot notation access or a JSON object).
+2. Compound object (may contain several fields).
+3. Multikey (may contain arrays and is created automatically if any indexed field is an array).
+4. Geospatial (created for 2d planar and 2d sphere geometry data).
+5. Text (used for text searches).
+
+***Index properties***
+
+1. Unique index.
+2. Partial index (indexes documents by a condition e.g. equality, field exists, $gt, $gte, $lt, $lte expressions, type expr. etc.).
+3. Sparse index (contains only documents with at least one indexed field regardless its value).
+4. TTL index (time-to-live -> sets a retention time of storing data in the database and automatically removes documents from a collection after a certain amount of time).
+5. Hidden index (cannot be used in queries -> we can evaluate the potential impact of dropping an index without actually dropping it).
