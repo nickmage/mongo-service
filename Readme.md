@@ -191,3 +191,31 @@ Bulk write:
 3. Sparse index (contains only documents with at least one indexed field regardless its value).
 4. TTL index (time-to-live -> sets a retention time of storing data in the database and automatically removes documents from a collection after a certain amount of time).
 5. Hidden index (cannot be used in queries -> we can evaluate the potential impact of dropping an index without actually dropping it).
+
+
+****Aggregations****
+
+***Pipeline***
+
+Pipeline contains stages - autonomous operations with documents (similar to stream API).
+> db.collectionName.aggregate([{$match:{"username": "Sir"}},{$addFields: {"a": "b"}}])
+
+where $match and $addFields are stages, each stage makes its own operation.
+
+Here's an example of aggregation where we get enabled users from Kharkiv and append age field to the result: 
+>db.users.aggregate(
+> [
+>   { $match: { "enabled": true, "city": "Kharkiv" } }, 
+>   { $addFields: 
+>       { "age": {
+>           $floor: {
+>               $divide : [
+>                   { $subtract: [new Date(), "$dateOfBirth"] },
+>                   365 * 24 * 60 * 60 * 1000
+>                   ]
+>               }
+>           } 
+>       }
+>   }
+> ]
+)
