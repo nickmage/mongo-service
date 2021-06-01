@@ -1,4 +1,4 @@
-****Collection operations****
+###Collection operations
 
 Create / switch to a collection (must be invoked before any other command execution): 
 > use collectionName
@@ -10,7 +10,7 @@ Delete collection from a database:
 > db.collectionName.drop()
 
 
-****CRUD operations****
+###CRUD operations
 
 ***Create operations***
 
@@ -174,7 +174,7 @@ Bulk write:
 ])
 
 
-****Indexes****
+###Indexes
 
 ***Types***
 
@@ -193,7 +193,7 @@ Bulk write:
 5. Hidden index (cannot be used in queries -> we can evaluate the potential impact of dropping an index without actually dropping it).
 
 
-****Aggregations****
+###Aggregations
 
 ***Pipeline***
 
@@ -203,7 +203,7 @@ Pipeline contains stages - autonomous operations with documents (similar to stre
 where $match and $addFields are stages, each stage makes its own operation.
 
 Here's an example of aggregation where we get enabled users from Kharkiv and append age field to the result: 
->db.users.aggregate(
+> db.users.aggregate(
 > [
 >   { $match: { "enabled": true, "city": "Kharkiv" } }, 
 >   { $addFields: 
@@ -219,3 +219,17 @@ Here's an example of aggregation where we get enabled users from Kharkiv and app
 >   }
 > ]
 )
+ 
+###Query optimization
+
+1. Use indexes for read operations.
+2. Consider query selectivity - more selective queries match a smaller percentage of documents, e.g. $nin and $ne operators are not very selective as they often match a large portion of the index.
+3. Use covered query (search only by indexed field/s and exclude non-indexed fields).
+4. To determine if a query is covered we can use explain call:
+   > db.users.explain()
+5. Use limit() to reduce number of documents in response:
+   > db.users.find({"city": "Kyiv"}).limit(25)
+6. Use projection to exclude unnecessary fields or include only required fields within response:
+   > db.users.find({"city": "Kyiv"}, {"_id": 0})
+   >  db.users.find({"city": "Kyiv"}, {"username": 1, "firstName": 1, "dateOfBirth": 1})
+7. Use increment operator $inc instead of fetching a document, changing and updating in a database. It also prevents race conditions.
