@@ -17,5 +17,10 @@ pipeline {
                 echo 'Deploying....'
             }
         }
+        stage('REAL Build') {
+             steps {
+                docker-compose up
+             }
+        }
     }
 }
