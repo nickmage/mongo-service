@@ -19,7 +19,7 @@ pipeline {
         }
         stage('REAL Build') {
              steps {
-                docker-compose up
+                sh("docker-compose up")
              }
         }
     }
