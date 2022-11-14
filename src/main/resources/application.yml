@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: mongo-service
+  data:
+    mongodb:
+      auto-index-creation: true
+      host: ${MONGO_HOST:localhost}
+      port: ${MONGO_PORT:27071}
+      database: ${MONGO_DATABASE:test}
+      username: ${MONGO_USERNAME:""}
+      password: ${MONGO_PASSWORD:""}
