@@ -23,15 +23,7 @@ pipeline {
                 echo 'Deploying....'
             }
         }
-        stage('Parametrised build') {
-            when {
-                expression {
-                    !params.GRADLE_BUILD_DEBUG_MODE
-                }
-            }
-            steps {
-                echo 'gradle clean build'
-            }
+        stage('Build with debug mode') {
             when {
                 expression {
                     params.GRADLE_BUILD_DEBUG_MODE
@@ -39,6 +31,16 @@ pipeline {
             }
             steps {
                 echo 'gradle clean build --debug'
+            }
+        }
+        stage('Build without debug mode') {
+            when {
+                expression {
+                    !params.GRADLE_BUILD_DEBUG_MODE
+                }
+            }
+            steps {
+                 echo 'gradle clean build'
             }
         }
     }
