@@ -40,6 +40,5 @@ pipeline {
             steps {
                 echo 'gradle clean build --debug'
             }
-
     }
 }
