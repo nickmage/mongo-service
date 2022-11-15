@@ -4,7 +4,7 @@ pipeline {
         booleanParam (
             defaultValue: false,
             description: 'Apply debug mode',
-            name: 'GRADLE_BUILD_DEBUG_MODE'
+            name: 'GRADLE_BUILD_DEBUG_MODE')
     }
 
     stages {
