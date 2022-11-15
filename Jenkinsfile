@@ -1,5 +1,11 @@
 pipeline {
     agent any
+    parameters {
+        booleanParam (
+            defaultValue: false,
+            description: 'Apply debug mode',
+            name: 'GRADLE_BUILD_DEBUG_MODE'
+    }
 
     stages {
         stage('Build') {
@@ -17,10 +23,23 @@ pipeline {
                 echo 'Deploying....'
             }
         }
-        stage('REAL Build') {
-             steps {
-                sh("docker compose up")
-             }
-        }
+        stage('Parametrised build') {
+            when {
+                expression {
+                    !params.GRADLE_BUILD_DEBUG_MODE
+                }
+            }
+            steps {
+                echo 'gradle clean build'
+            }
+            when {
+                expression {
+                    params.GRADLE_BUILD_DEBUG_MODE
+                }
+            }
+            steps {
+                echo 'gradle clean build --debug'
+            }
+
     }
 }
